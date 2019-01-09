@@ -1,6 +1,7 @@
 # If you come from bash you might have to change your $PATH.
 PATH=$HOME/bin:/usr/local/bin:$PATH
 PATH=/anaconda2/bin:$PATH
+PATH=$PATH:/usr/local/sbin
 
 export PATH
 
@@ -100,4 +101,5 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Powerlevel9k stuff
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir rbenv vcs)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(anaconda dir dir_writable rbenv vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
