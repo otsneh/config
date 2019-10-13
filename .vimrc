@@ -20,6 +20,7 @@ Plugin 'ervandew/supertab'
 Plugin 'bling/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'majutsushi/tagbar'
+Plugin 'fatih/vim-go'
 
 " all plugins must be added above the following line
 call vundle#end()
@@ -67,6 +68,9 @@ set expandtab
 " use 4 spaces when indenting with '>'
 set shiftwidth=4
 
+" round to multiple of 4 when indenting with '>'
+set shiftround
+
 " set backspace to work in insert mode
 set backspace=indent,eol,start
 
@@ -109,17 +113,21 @@ let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 " set leader to be comma
 let mapleader=","
 
+" set local leader to \
+let maplocalleader="\\"
+
 " map ", " to turn off search highlight after search is over
 nnoremap <leader><space> :nohlsearch<CR>
 
 " map ",n" to NERDTree
 noremap <Leader>n :NERDTreeToggle<CR>
 
-" map ", m" to Tagbar
+" map ",m" to Tagbar
 noremap <Leader>m :TagbarToggle<CR>
 
 " jk is <ESC>
 inoremap jk <ESC>
+inoremap <esc> <nop>
 
 " better split screen movement
 nnoremap <C-J> <C-W><C-J>
@@ -127,24 +135,98 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" remove these when I get better at vim
-" nnoremap <C-Down> <C-W><C-J>
-" nnoremap <C-Up> <C-W><C-K>
-" nnoremap <C-Right> <C-W><C-L>
-" nnoremap <C-Left> <C-W><C-H>
-
 " disable arrow keys
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+noremap <up> <nop>
+noremap <down> <nop>
+noremap <left> <nop>
+noremap <right> <nop>
 
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
+" j and k move to next row instead of file line
+nnoremap j gj
+nnoremap k gk
 
-vnoremap <Up> <Nop>
-vnoremap <Down> <Nop>
-vnoremap <Left> <Nop>
-vnoremap <Right> <Nop>
+" move line down one
+noremap <leader>- ddp
+
+" move line up one
+noremap <leader>_ ddkP
+
+" uppercase current word in insert/normal mode
+inoremap <leader><c-u> <esc>viwU<esc>ie
+nnoremap <leader><c-u> viwU<esc>e
+
+" edit my vimrc file
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
+" source my vimrc file
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" add some abbreviations
+iabbrev adn and
+iabbrev teh the
+iabbrev waht what
+
+iabbrev @@ ophirsneh@gmail.com
+iabbrev ccopy Copyright 2019 Ophir Sneh, all rights reserved 
+iabbrev ssig -- <cr>Ophir Sneh<cr>ophirsneh@gmail.com
+
+" wrap text in quotes
+nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel
+nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel
+nnoremap <leader>` viw<esc>a`<esc>bi`<esc>lel
+
+vnoremap <leader>" <esc>`>a"<esc>`<i"<esc>
+vnoremap <leader>' <esc>`>a'<esc>`<i'<esc>
+vnoremap <leader>` <esc>`>a`<esc>`<i`<esc>
+
+" stronger h
+nnoremap H ^
+
+" stronger l
+nnoremap L $
+
+" language specific autocmd
+augroup on_read
+    autocmd!
+    autocmd BufNewFile,BufRead *.html :setlocal nowrap
+augroup END
+
+augroup filetype_js_c
+    autocmd!
+    " comments
+    autocmd FileType javascript,c,cpp :nnoremap <buffer> <localleader>c I//<esc>
+    autocmd FileType javascript,c,cpp :iabbrev <buffer> iff if ()<left>
+augroup END
+
+augroup filetype_python
+    autocmd!
+    autocmd FileType python :nnoremap <buffer> <localleader>c I#<esc>
+    autocmd FileType python :iabbrev <buffer> iff if:<left>
+augroup END
+
+augroup filetype_html
+    autocmd!
+    autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+augroup END
+
+" parameters
+onoremap p i(
+
+" body
+onoremap b \return<cr>
+
+" inside next parenthesis/brackets
+onoremap in( :<c-u>normal! f(vi(<cr>
+onoremap in{ :<c-u>normal! f{vi{<cr>
+
+" inside last parenthesis/brackets
+onoremap il( :<c-u>normal! F)vi(<cr>
+onoremap il{ :<c-u>normal! F}vi{<cr>
+
+" around next parenthesis/brackets
+onoremap an( :<c-u>normal! f(<cr>
+onoremap an{ :<c-u>normal! f{<cr>
+
+" around last parenthesis/brackets
+onoremap al( :<c-u>normal! vF)l<cr>
+onoremap al{ :<c-u>normal! vF}l<cr>

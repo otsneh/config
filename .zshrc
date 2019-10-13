@@ -2,8 +2,12 @@
 PATH=$HOME/bin:/usr/local/bin:$PATH
 PATH=/anaconda2/bin:$PATH
 PATH=$PATH:/usr/local/sbin
+PATH=$PATH:/Users/ophirsneh/.local/bin
+PATH=$HOME/.rbenv/versions/2.5.0/bin:$PATH
 
 export PATH
+
+export NETID="osneh2"
 
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/ophirsneh/.oh-my-zsh
