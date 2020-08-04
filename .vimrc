@@ -191,6 +191,10 @@ augroup on_read
     autocmd BufNewFile,BufRead *.html :setlocal nowrap
 augroup END
 
+augroup filetype_sage
+    au! BufRead,BufNewFile *.sage,*.spyx,*.pyx setfiletype python
+augroup END
+
 augroup filetype_js_c
     autocmd!
     " comments
