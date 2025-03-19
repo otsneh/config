@@ -127,7 +127,9 @@ noremap <Leader>m :TagbarToggle<CR>
 
 " jk is <ESC>
 inoremap jk <ESC>
-inoremap <esc> <nop>
+
+" disabled with oryx keyboard
+" inoremap <esc> <nop>
 
 " better split screen movement
 nnoremap <C-J> <C-W><C-J>
@@ -135,11 +137,11 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-" disable arrow keys
-noremap <up> <nop>
-noremap <down> <nop>
-noremap <left> <nop>
-noremap <right> <nop>
+" disable arrow keys (disabled with oryx keyboard)
+" noremap <up> <nop>
+" noremap <down> <nop>
+" noremap <left> <nop>
+" noremap <right> <nop>
 
 " j and k move to next row instead of file line
 nnoremap j gj
