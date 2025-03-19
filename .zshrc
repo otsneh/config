@@ -7,15 +7,13 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 export PATH
 
-export NETID="osneh2"
-
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/ophirsneh/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel9k/powerlevel10k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -68,7 +66,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  osx
+  macos
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
