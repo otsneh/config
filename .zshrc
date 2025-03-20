@@ -1,9 +1,5 @@
 # If you come from bash you might have to change your $PATH.
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
-# PATH=$HOME/bin:$PATH
-# PATH=/anaconda2/bin:$PATH
-# PATH=$PATH:/Users/ophirsneh/.local/bin
-# PATH=$HOME/.rbenv/versions/2.5.0/bin:$PATH
 
 export PATH
 
@@ -13,7 +9,7 @@ export ZSH=/Users/ophirsneh/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel10k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -101,8 +97,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-# Powerlevel9k stuff
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv anaconda dir dir_writable rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs history time)
-source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
