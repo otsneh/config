@@ -51,3 +51,7 @@ Open vim and install vundle plugins:
 vim .vimrc
 :PluginInstall
 ```
+
+## Additional Notes
+
+For the .gitconfig file, copy the file contents to the end of the existing .gitconfig file, as the user details have been omitted.
