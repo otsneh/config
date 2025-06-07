@@ -1,6 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
+# Add homebrew path for mac python.
+PATH=$(brew --prefix python)/libexec/bin:$PATH
+
 export PATH
 
 # Path to your oh-my-zsh installation.
