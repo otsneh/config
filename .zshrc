@@ -4,6 +4,9 @@ PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # Add homebrew path for mac python.
 PATH=$(brew --prefix python)/libexec/bin:$PATH
 
+# Add path for cursor agent.
+PATH=$HOME/.local/bin:$PATH
+
 export PATH
 
 # Path to your oh-my-zsh installation.
