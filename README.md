@@ -52,6 +52,19 @@ vim .vimrc
 :PluginInstall
 ```
 
+Install TPM (tmux plugins:
+
+```
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
+Source tmux and install plugins:
+
+```
+tmux source ~/.tmux.conf
+<ctrl+A> I
+```
+
 ## Additional Notes
 
 For the .gitconfig file, copy the file contents to the end of the existing .gitconfig file, as the user details have been omitted.
