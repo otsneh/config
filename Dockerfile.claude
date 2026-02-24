@@ -14,4 +14,4 @@ ENV PATH="/home/claude/.local/bin:$PATH"
 
 WORKDIR /workspace
 
-ENTRYPOINT ["sh", "-c", "ln -sf /home/claude/.claude/.claude.json /home/claude/.claude.json && exec claude --dangerously-skip-permissions"]
+ENTRYPOINT ["sh", "-c", "ln -sf /home/claude/.claude/.claude.json /home/claude/.claude.json && exec claude --dangerously-skip-permissions \"$@\"", "--"]
