@@ -117,6 +117,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias claude-build='docker build --no-cache -t claude-code - < ~/Dockerfile.claude'
+alias claude-sandbox='docker run -it --rm --cap-drop=ALL --security-opt=no-new-privileges --memory=4g --cpus=2 --pids-limit=256 -e TERM=$TERM -e COLORTERM=$COLORTERM -v "$PWD":/workspace -v ~/.claude:/home/claude/.claude claude-code'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

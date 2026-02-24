@@ -65,6 +65,22 @@ tmux source ~/.tmux.conf
 <ctrl+A> I
 ```
 
+### Claude Code Sandbox
+
+Symlink .claude.json into mounted .claude/ directory
+
+```
+mv ~/.claude.json ~/.claude/.claude.json
+ln -s ~/.claude/.claude.json ~/.claude.json
+```
+
+Build and run
+
+```
+claude-build  # Rebuild to get claude code cli updates.
+claude-sandbox
+```
+
 ## Additional Notes
 
 For the .gitconfig file, copy the file contents to the end of the existing .gitconfig file, as the user details have been omitted.

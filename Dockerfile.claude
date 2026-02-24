@@ -1,0 +1,17 @@
+FROM alpine:3.21
+
+RUN apk add --no-cache git curl ca-certificates libgcc libstdc++ ripgrep bash jq
+RUN ln -sf /bin/bash /bin/sh
+
+ENV USE_BUILTIN_RIPGREP=0
+
+RUN adduser -D claude
+USER claude
+
+RUN curl -fsSL https://claude.ai/install.sh | bash
+
+ENV PATH="/home/claude/.local/bin:$PATH"
+
+WORKDIR /workspace
+
+ENTRYPOINT ["sh", "-c", "ln -sf /home/claude/.claude/.claude.json /home/claude/.claude.json && exec claude --dangerously-skip-permissions"]
