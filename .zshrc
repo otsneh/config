@@ -9,18 +9,22 @@ fi
 PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # Add homebrew path for mac python.
-PATH=$(brew --prefix python)/libexec/bin:$PATH
+if command -v brew &>/dev/null; then
+  PATH=$(brew --prefix python)/libexec/bin:$PATH
+fi
 
 # Add path for cursor agent.
 PATH=$HOME/.local/bin:$PATH
 
 # Add path for brew postgres
-PATH="/usr/local/opt/postgresql@16/bin:$PATH"
+if command -v brew &>/dev/null; then
+  PATH="$(brew --prefix)/opt/postgresql@16/bin:$PATH"
+fi
 
 export PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/ophirsneh/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
