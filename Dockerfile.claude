@@ -1,6 +1,6 @@
-FROM alpine:3.21
+FROM python:3.14-alpine3.21
 
-RUN apk add --no-cache git curl ca-certificates libgcc libstdc++ ripgrep bash jq
+RUN apk add --no-cache git curl ca-certificates libgcc libstdc++ ripgrep bash jq gcc musl-dev libffi-dev
 RUN ln -sf /bin/bash /bin/sh
 
 ENV USE_BUILTIN_RIPGREP=0
