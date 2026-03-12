@@ -67,19 +67,34 @@ tmux source ~/.tmux.conf
 
 ### Claude Code Sandbox
 
-Symlink .claude.json into mounted .claude/ directory
+Symlink .claude.json into mounted .claude/ directory:
 
 ```
 mv ~/.claude.json ~/.claude/.claude.json
 ln -s ~/.claude/.claude.json ~/.claude.json
 ```
 
-Build and run
+Build and run:
 
 ```
 claude-build  # Rebuild to get claude code cli updates.
 claude-sandbox
 ```
+
+Set up github key:
+
+```
+mkdir -p ~/.ssh/github
+ssh-keygen -t rsa -b 4096 -f ~/.ssh/github/id_rsa -N "" -C "claude-sandbox-github"
+```
+
+Add public key to GitHub account:
+
+```
+cat ~/.ssh/github/id_rsa.pub | pbcopy
+```
+
+Add output to https://github.com/settings/ssh/new
 
 ## Additional Notes
 
