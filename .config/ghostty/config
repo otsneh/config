@@ -1,0 +1,8 @@
+shell-integration-features = no-cursor
+cursor-style = underline
+cursor-style-blink = false
+background-opacity = 0.97
+keybind = global:cmd+ctrl+t=toggle_visibility
+maximize = true
+macos-titlebar-style = tabs
+theme = Tomorrow Night

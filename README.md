@@ -1,6 +1,6 @@
 # Setup steps
 
-Change default shell to zsh:
+Change default shell to zsh (if not already):
 
 ```
 chsh -s $(which zsh)
@@ -29,7 +29,7 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/p
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 ```
 
-Edit plugins in .zshrc (wiped by powerlevel10k install):
+Edit plugins in .zshrc (if wiped by powerlevel10k install):
 ```
 plugins=(
     git
