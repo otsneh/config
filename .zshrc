@@ -136,5 +136,7 @@ claude-build() {
 }
 alias claude-sandbox='docker run -it --rm --cap-drop=ALL --security-opt=no-new-privileges --memory=4g --cpus=2 --pids-limit=256 --dns 8.8.8.8 -e TERM=$TERM -e COLORTERM=$COLORTERM -v "$PWD":/workspace -v ~/.claude:/home/claude/.claude -v ~/.ssh/github:/home/claude/.ssh_key:ro claude-code'
 
+export LESS="-R --mouse"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

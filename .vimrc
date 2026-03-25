@@ -104,6 +104,9 @@ set incsearch
 " highlight search matches
 set hlsearch
 
+" set mouse in all modes (somewhat fixes tmux scrolling)
+set mouse=a
+
 " enable powerline fonts for vim-airline
 let g:airline_powerline_fonts = 1
 
