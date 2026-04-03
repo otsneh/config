@@ -13,6 +13,8 @@ RUN mkdir -p /home/claude/.ssh && \
   printf "Host github.com\n  IdentityFile /home/claude/.ssh_key/id_rsa\n" > /home/claude/.ssh/config && \
   chown -R claude:claude /home/claude/.ssh
 
+RUN pip install --no-cache-dir awscli
+
 USER claude
 
 RUN curl -fsSL https://claude.ai/install.sh | bash

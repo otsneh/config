@@ -134,7 +134,7 @@ claude-build() {
   [[ "$1" == "--use-cache" ]] && cache=""
   docker build $cache -t claude-code - < ~/Dockerfile.claude
 }
-alias claude-sandbox='docker run -it --rm --cap-drop=ALL --security-opt=no-new-privileges --memory=4g --cpus=2 --pids-limit=256 --dns 8.8.8.8 -e TERM=$TERM -e COLORTERM=$COLORTERM -v "$PWD":/workspace -v ~/.claude:/home/claude/.claude -v ~/.ssh/github:/home/claude/.ssh_key:ro claude-code'
+alias claude-sandbox='docker run -it --rm --cap-drop=ALL --security-opt=no-new-privileges --memory=4g --cpus=2 --pids-limit=256 --dns 8.8.8.8 --add-host host.docker.internal:host-gateway -e TERM=$TERM -e COLORTERM=$COLORTERM $([ -f "$PWD/.env.claude" ] && echo "--env-file $PWD/.env.claude") -v "$PWD":/workspace -v ~/.claude:/home/claude/.claude -v ~/.ssh/github:/home/claude/.ssh_key:ro claude-code'
 
 export LESS="-R --mouse"
 
