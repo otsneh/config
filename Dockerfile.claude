@@ -1,17 +1,18 @@
-FROM python:3.14-alpine3.21
+FROM python:3.14-slim
 
-RUN apk add --no-cache git curl ca-certificates libgcc libstdc++ ripgrep bash jq gcc musl-dev libffi-dev openssh-client \
-    && apk add --no-cache --upgrade --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main musl
-RUN ln -sf /bin/bash /bin/sh
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        git curl ca-certificates ripgrep bash jq gcc libffi-dev openssh-client \
+    && rm -rf /var/lib/apt/lists/*
 
 ENV USE_BUILTIN_RIPGREP=0
 
-RUN adduser -D claude
+RUN useradd -m claude
 
-RUN mkdir -p /home/claude/.ssh && \
-  echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > /home/claude/.ssh/known_hosts && \
-  printf "Host github.com\n  IdentityFile /home/claude/.ssh_key/id_rsa\n" > /home/claude/.ssh/config && \
-  chown -R claude:claude /home/claude/.ssh
+RUN mkdir -p /home/claude/.ssh \
+    && echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > /home/claude/.ssh/known_hosts \
+    && printf "Host github.com\n  IdentityFile /home/claude/.ssh_key/id_rsa\n" > /home/claude/.ssh/config \
+    && chown -R claude:claude /home/claude/.ssh
 
 RUN pip install --no-cache-dir awscli
 
