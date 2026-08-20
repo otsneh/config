@@ -138,6 +138,18 @@ claude-build() {
 # Mint GH_TOKEN at https://github.com/settings/tokens?type=beta (fine-grained PAT; this repo; Contents/PRs/Issues read-write).
 alias claude-sandbox='docker run -it --rm --cap-drop=ALL --security-opt=no-new-privileges --memory=4g --cpus=2 --pids-limit=256 --dns 8.8.8.8 --add-host host.docker.internal:host-gateway -e TERM=$TERM -e COLORTERM=$COLORTERM $([ -f "$PWD/.env.claude" ] && echo "--env-file $PWD/.env.claude") -v "$PWD":/workspace -v ~/.claude:/home/claude/.claude -v ~/.ssh/github:/home/claude/.ssh_key:ro claude-code'
 
+codex-build() {
+  local cache="--no-cache"
+  [[ "$1" == "--use-cache" ]] && cache=""
+  docker build $cache -t codex-code - < ~/Dockerfile.codex
+}
+# Codex reuses .env.claude, host Codex state, and the same GitHub SSH key as the Claude sandbox.
+codex-sandbox() {
+  local environment_arguments=()
+  [[ -f "$PWD/.env.claude" ]] && environment_arguments=(--env-file "$PWD/.env.claude")
+  docker run -it --rm --cap-drop=ALL --security-opt=no-new-privileges --memory=4g --cpus=2 --pids-limit=256 --dns 8.8.8.8 --add-host host.docker.internal:host-gateway -e TERM="$TERM" -e COLORTERM="$COLORTERM" "${environment_arguments[@]}" -v "$PWD":/workspace -v ~/.codex:/home/codex/.codex -v ~/.ssh/github:/home/codex/.ssh_key:ro codex-code "$@"
+}
+
 export LESS="-R --mouse"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

@@ -1,0 +1,45 @@
+FROM python:3.14-slim
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        git curl ca-certificates ripgrep bash jq gcc libffi-dev openssh-client nodejs npm \
+    && rm -rf /var/lib/apt/lists/*
+
+# GitHub CLI from the official apt repository
+RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
+        -o /usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg \
+    && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" \
+        > /etc/apt/sources.list.d/github-cli.list \
+    && apt-get update \
+    && apt-get install -y --no-install-recommends gh \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN useradd -m codex
+
+RUN mkdir -p /home/codex/.ssh \
+    && echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" > /home/codex/.ssh/known_hosts \
+    && printf "Host github.com\n  IdentityFile /home/codex/.ssh_key/id_rsa\n" > /home/codex/.ssh/config \
+    && chown -R codex:codex /home/codex/.ssh
+
+RUN pip install --no-cache-dir awscli uv
+
+USER codex
+
+RUN curl -fsSL https://chatgpt.com/codex/install.sh | sh
+
+ENV PATH="/home/codex/.local/bin:$PATH"
+
+# The host ~/.codex mount replaces the installer's package directory at runtime.
+RUN codex_executable="$(readlink -f /home/codex/.local/bin/codex)" \
+      && code_mode_host="$(find /home/codex/.codex -name codex-code-mode-host -print -quit)" \
+      && test -x "$codex_executable" \
+      && test -n "$code_mode_host" \
+      && test -x "$code_mode_host" \
+      && cp --dereference "$codex_executable" /home/codex/.local/bin/codex-standalone \
+      && cp --dereference "$code_mode_host" /home/codex/.local/bin/codex-code-mode-host \
+      && ln -sfn /home/codex/.local/bin/codex-standalone /home/codex/.local/bin/codex
+
+WORKDIR /workspace
+
+ENTRYPOINT ["codex", "--dangerously-bypass-approvals-and-sandbox", "-c", "mcp_servers.node_repl.enabled=false"]
